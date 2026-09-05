@@ -91,7 +91,33 @@
       <sub>대시보드 · 매매일지 · AI 종목 · AI 캘린더 · AI Notice — 엔진 서버 주소만 넣으면 같은 데이터를 휴대폰에서 확인 (실제 화면, 계좌·금액 마스킹)</sub>
     </td>
   </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/images/sheet_scorecard.png" alt="구글 시트 전략성과 탭" /><br/>
+      <b>📗 구글 시트 — 전략성과</b><br/>
+      <sub>AI 매매 전략의 목표가·손절가를 일봉으로 자동 채점한 기록</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/images/sheet_swing_strategy.png" alt="구글 시트 단기_스윙전략 탭" /><br/>
+      <b>📗 구글 시트 — AI 매매 전략</b><br/>
+      <sub>프로파일 이름 탭에 진입가·목표가·손절가·매수/매도 조건·리스크·근거가 한 행씩 업로드</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/images/sheet_fundamental_picks.png" alt="구글 시트 주가_재무기반 탭" /><br/>
+      <b>📗 구글 시트 — AI 종목 선별</b><br/>
+      <sub>선별 근거가 된 PER·PBR·ROE·부채비율 등 재무 지표를 종목별로 저장</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/images/sheet_ai_review.png" alt="구글 시트 AI복기 탭" /><br/>
+      <b>📗 구글 시트 — 주간 매매 복기</b><br/>
+      <sub>총평·매매 점수·반복 패턴·전략 이행 분석·다음 주 체크포인트 (실제 금액 셀은 모자이크)</sub>
+    </td>
+  </tr>
 </table>
+
+<sub>구글 시트 캡처는 실제 시트에서 브라우저 영역을 잘라낸 것이며, 매매일지 탭은 실제 매매 금액이 포함되어 공개하지 않습니다.</sub>
 
 ---
 
