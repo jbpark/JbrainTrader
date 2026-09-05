@@ -13,7 +13,7 @@
 [![Claude CLI](https://img.shields.io/badge/AI-Claude%20CLI-D97757?logo=anthropic&logoColor=white)](#ai-기능)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[**🔗 라이브 데모 보기**](https://jbraintrader-demo.pages.dev) · [주요 기능](#주요-기능) · [화면 소개](#화면-소개) · [설치](#설치) · [전략 파일](#전략-파일) · [AI 기능](#ai-기능)
+[**🔗 라이브 데모 보기**](https://jbraintrader-demo.pages.dev) · [**📝 개발 이야기 (티스토리)**](https://javata.tistory.com/116) · [주요 기능](#주요-기능) · [화면 소개](#화면-소개) · [설치](#설치) · [전략 파일](#전략-파일) · [AI 기능](#ai-기능)
 
 <a href="https://jbraintrader-demo.pages.dev"><img src="docs/images/demo_main.png" width="880" alt="JbrainTrader 대시보드 (데모, Mock 데이터)" /></a>
 
@@ -430,6 +430,7 @@ AI 기능은 로컬에 설치된 **Claude CLI**(`claude -p`)를 호출합니다.
 - Flutter 앱: `trading_app/` 에서 `flutter run`. 앱 설정 화면에서 엔진 서버 주소(IP:5000)를 입력합니다. APK 빌드는 `build_apk.bat`
 - Claude CLI 작업 기록 훅: [.claude/settings.json](.claude/settings.json)에 등록된 `UserPromptSubmit` / `Stop` 훅이 [cli_hook_prompt.py](cli_hook_prompt.py) 와 [cli_hook_stop.py](cli_hook_stop.py) 를 실행해 프롬프트와 결과 요약을 엔진(`JBRAIN_BASE_URL`, 기본 http://localhost:5000)으로 보내고, 대시보드 "CLI 작업" 탭에 저장합니다. 엔진이 꺼져 있으면 훅은 조용히 건너뜁니다.
 - 기능 데모 페이지: [demo/](demo/) 폴더의 정적 사이트가 Cloudflare Pages에 배포되어 있습니다 → https://jbraintrader-demo.pages.dev . 재배포 방법은 [demo/README.md](demo/README.md) 참고.
+- 개발 이야기 (블로그): 이 프로젝트를 만들게 된 계기와 구조, 전략·AI·일상 편의 기능을 시리즈로 정리한 글입니다 → https://javata.tistory.com/116
 
 ---
 
