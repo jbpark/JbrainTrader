@@ -370,16 +370,16 @@
     let sel = DEMO.aiPicks.profiles[0].name, running = false;
     const render = () => {
       const p = DEMO.aiPicks.profiles.find((x) => x.name === sel), r = DEMO.aiPicks.results[sel];
-      c.innerHTML = `<div class="two-col">
+      c.innerHTML = `<div class="stack"><div class="two-col">
         <div class="stack"><div class="row between"><div class="card-title" style="margin:0">✨ 종목 선별 프로파일</div><button class="small" id="np">+ 새 프로파일 생성</button></div>
           <div class="list">${DEMO.aiPicks.profiles.map((x) => `<div class="list-item ${x.name === sel ? 'active' : ''}" data-p="${x.name}"><div class="name">${x.name}</div><div class="desc">모델: ${x.model} · ${DEMO.aiPicks.results[x.name] ? '결과 ' + DEMO.aiPicks.results[x.name].picks.length + '종목' : '미실행'}</div></div>`).join('')}</div></div>
-        <div class="stack"><div class="card"><div class="row between"><h3 style="margin:0">${p.name}</h3><div class="row"><button class="small" id="rf" title="모바일 등 다른 기기에서 변경된 내용을 다시 불러옵니다">🔄 새로고침</button><button class="small danger">삭제</button></div></div>
+        <div class="card"><div class="row between"><h3 style="margin:0">${p.name}</h3><div class="row"><button class="small" id="rf" title="모바일 등 다른 기기에서 변경된 내용을 다시 불러옵니다">🔄 새로고침</button><button class="small danger">삭제</button></div></div>
           <div class="grid c2" style="margin-top:10px"><div class="field"><label>프로파일 명칭</label><input value="${p.name}" readonly/></div><div class="field"><label>실행 AI 모델</label><select><option ${p.model === 'opus' ? 'selected' : ''}>opus</option><option ${p.model === 'sonnet' ? 'selected' : ''}>sonnet</option><option ${p.model === 'haiku' ? 'selected' : ''}>haiku</option></select></div></div>
           <div class="field"><label>종목 선별 프롬프트</label><textarea readonly style="min-height:90px">${esc(p.prompt)}</textarea></div>
-          <div class="row"><button class="primary" id="run" ${running ? 'disabled' : ''} title="프롬프트를 Claude CLI로 실행해 종목을 선별합니다">${running ? '⏳ Claude CLI 실행 중...' : '▶ 실행'}</button><button class="small" id="cmp" title="선별된 종목들의 재무제표·투자지표를 비교 분석합니다">📊 재무 비교 분석</button></div></div>
-          <div class="card"><div class="row between"><h3 style="margin:0">📋 선별 결과</h3>${r ? `<span class="muted small">실행: ${r.ran_at}</span>` : ''}</div>
+          <div class="row"><button class="primary" id="run" ${running ? 'disabled' : ''} title="프롬프트를 Claude CLI로 실행해 종목을 선별합니다">${running ? '⏳ Claude CLI 실행 중...' : '▶ 실행'}</button><button class="small" id="cmp" title="선별된 종목들의 재무제표·투자지표를 비교 분석합니다">📊 재무 비교 분석</button></div></div></div>
+        <div class="card"><div class="row between"><h3 style="margin:0">📋 선별 결과</h3>${r ? `<span class="muted small">실행: ${r.ran_at}</span>` : ''}</div>
           ${r ? `<div class="scroll-x"><table><thead><tr><th>#</th><th>종목</th><th>코드</th><th>점수</th><th>선정 근거</th><th></th></tr></thead><tbody>${r.picks.map((k, i) => `<tr><td class="muted">${i + 1}</td><td><b>${k.name}</b></td><td class="mono muted">${k.ticker}</td><td><span class="score">${k.score}</span></td><td style="white-space:normal;min-width:260px">${k.reason}</td><td><button class="small" data-add="${k.name}">관심종목 추가</button></td></tr>`).join('')}</tbody></table></div>` : '<div class="muted" style="padding:20px 0">아직 실행하지 않은 프로파일입니다. "▶ 실행"을 눌러 보세요.</div>'}
-          <div class="disclaimer">※ AI가 생성한 참고용 정보입니다. 투자 판단과 책임은 본인에게 있습니다.</div></div></div></div>`;
+          <div class="disclaimer">※ AI가 생성한 참고용 정보입니다. 투자 판단과 책임은 본인에게 있습니다.</div></div></div>`;
       c.querySelectorAll('[data-p]').forEach((el) => (el.onclick = () => { sel = el.dataset.p; render(); }));
       $('#run', c).onclick = () => { running = true; render(); toast('claude -p 로 프롬프트 실행 중... (데모: 2초 후 가짜 결과 생성)', true); setTimeout(() => { if (!DEMO.aiPicks.results[sel]) DEMO.aiPicks.results[sel] = { ran_at: new Date().toISOString().slice(0, 16).replace('T', ' '), picks: [{ ticker: '017670', name: 'SK텔레콤', score: 79, reason: '배당수익률 6.1%, 5년 연속 배당 증가' }, { ticker: '033780', name: 'KT&G', score: 77, reason: '배당수익률 5.4%, 자사주 소각 병행' }, { ticker: '086790', name: '하나금융지주', score: 74, reason: '배당수익률 5.8%, 분기 배당 전환' }] }; else DEMO.aiPicks.results[sel].ran_at = new Date().toISOString().slice(0, 16).replace('T', ' '); running = false; render(); toast('선별 완료 — 결과가 SQLite(ai_picks.db)에 저장됩니다 (데모)', true); }, 2000); };
       $('#cmp', c).onclick = () => demoOnly('재무 비교 분석');
@@ -433,14 +433,16 @@
     const C = DEMO.calendar;
     const render = () => {
       const p = C.profiles.find((x) => x.name === sel);
-      c.innerHTML = `<div class="two-col">
-        <div class="stack"><div class="row between"><div class="card-title" style="margin:0">📅 캘린더 프로파일</div><button class="small" id="np">+ 새 프로파일</button></div>
-          <div class="list">${C.profiles.map((x) => `<div class="list-item ${x.name === sel ? 'active' : ''}" data-p="${x.name}"><div class="name">${x.name}</div></div>`).join('')}</div>
-          <div class="card"><div class="field"><label>프로파일 이름</label><input value="${p.name}" readonly/></div><div class="field"><label>지시문</label><textarea readonly style="min-height:80px">${esc(p.prompt)}</textarea></div><div class="row"><button class="primary" id="run">▶ 실행</button><button class="small">💾 저장</button><button class="small danger">🗑 삭제</button></div></div>
-          <div class="card"><h3>🗓 주요 일정</h3>${C.events.map((e) => `<div class="kv"><span><span class="tag ${e.type === 'stock' ? 'green' : e.type === 'dividend' ? 'yellow' : e.type === 'market' ? 'purple' : 'blue'}">${e.type}</span> ${e.title}</span><span class="muted">${C.month}/${e.day}</span></div>`).join('')}</div></div>
-        <div class="card"><div class="row between" style="margin-bottom:10px"><button class="small" id="prev" title="이전 달">‹</button><h3 style="margin:0">${C.year}년 ${C.month}월</h3><div class="row"><button class="small">오늘</button><button class="small" id="next" title="다음 달">›</button></div></div>
+      c.innerHTML = `<div class="stack">
+        <div class="card"><div class="row between" style="margin-bottom:10px"><button class="small" id="prev" title="이전 달">‹</button><h3 style="margin:0">${C.year}년 ${C.month}월 <span class="tag blue">${p.name}</span></h3><div class="row"><button class="small">오늘</button><button class="small" id="next" title="다음 달">›</button></div></div>
           ${calendarGrid(C.year, C.month, (d) => { const evs = C.events.filter((e) => e.day === d); return `<div class="day ${d === 5 ? 'active' : ''}"><div class="d">${d}</div>${evs.map((e) => `<div class="ev ${e.type}" title="${e.title}">${e.title}</div>`).join('')}</div>`; })}
-          <div class="small muted" style="margin-top:8px">색상: <span class="tag blue">macro 경제지표</span> <span class="tag green">stock 종목 이벤트</span> <span class="tag yellow">dividend 배당</span> <span class="tag purple">market 시장</span></div></div></div>`;
+          <div class="small muted" style="margin-top:8px">색상: <span class="tag blue">macro 경제지표</span> <span class="tag green">stock 종목 이벤트</span> <span class="tag yellow">dividend 배당</span> <span class="tag purple">market 시장</span></div></div>
+        <div class="two-col" style="grid-template-columns: 1fr 1fr">
+          <div class="stack"><div class="row between"><div class="card-title" style="margin:0">📅 캘린더 프로파일</div><button class="small" id="np">+ 새 프로파일</button></div>
+            <div class="list">${C.profiles.map((x) => `<div class="list-item ${x.name === sel ? 'active' : ''}" data-p="${x.name}"><div class="name">${x.name}</div></div>`).join('')}</div>
+            <div class="card"><div class="field"><label>프로파일 이름</label><input value="${p.name}" readonly/></div><div class="field"><label>지시문</label><textarea readonly style="min-height:80px">${esc(p.prompt)}</textarea></div><div class="row"><button class="primary" id="run">▶ 실행</button><button class="small">💾 저장</button><button class="small danger">🗑 삭제</button></div></div></div>
+          <div class="card"><h3>🗓 주요 일정</h3>${C.events.map((e) => `<div class="kv"><span><span class="tag ${e.type === 'stock' ? 'green' : e.type === 'dividend' ? 'yellow' : e.type === 'market' ? 'purple' : 'blue'}">${e.type}</span> ${e.title}</span><span class="muted">${C.month}/${e.day}</span></div>`).join('')}</div>
+        </div></div>`;
       c.querySelectorAll('[data-p]').forEach((el) => (el.onclick = () => { sel = el.dataset.p; render(); }));
       $('#run', c).onclick = () => { toast('Claude CLI로 이번 달 일정 정리 중... (데모)', true); setTimeout(() => toast('일정 9건 생성 완료 → ai_calendar.db 저장 (데모)', true), 1500); };
       $('#np', c).onclick = () => demoOnly('새 프로파일');

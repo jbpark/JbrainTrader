@@ -214,6 +214,7 @@ main { flex: 1; min-width: 0; padding: 22px 28px 40px; display: flex; flex-direc
 .list-item .name { font-weight: 600; font-size: 0.88rem; }
 .list-item .desc { font-size: 0.76rem; color: var(--text-muted); margin-top: 2px; }
 .two-col { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+.two-col > *, .data-layout > *, .grid > * { min-width: 0; }
 .field { margin-bottom: 12px; }
 .field label { display: block; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 5px; }
 .disclaimer { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; }
@@ -225,7 +226,8 @@ main { flex: 1; min-width: 0; padding: 22px 28px 40px; display: flex; flex-direc
 .cond-list { margin: 0; padding-left: 18px; font-size: 0.85rem; }
 .cond-list li { margin-bottom: 4px; }
 
-.cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.cal .day { min-width: 0; overflow: hidden; }
 .cal .dow { text-align: center; font-size: 0.72rem; color: var(--text-muted); padding: 4px 0; }
 .cal .day { min-height: 72px; padding: 6px; border-radius: 8px; background: rgba(255,255,255,.03); border: 1px solid var(--border-soft); font-size: 0.75rem; cursor: pointer; }
 .cal .day.empty { background: transparent; border-color: transparent; cursor: default; }
