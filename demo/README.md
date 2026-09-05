@@ -4,6 +4,8 @@ JbrainTrader 웹 대시보드의 **메뉴 구조와 기능을 소개하는 정�
 모든 숫자는 `data.js`에 들어 있는 **Mock 데이터**이며, 실제 계좌·시세·매매 기록이 아닙니다.
 백엔드 호출이 전혀 없어 브라우저만 있으면 어디서든 열립니다.
 
+**배포 주소**: https://jbraintrader-demo.pages.dev (Cloudflare Pages, 프로젝트명 `jbraintrader-demo`)
+
 ## 구성
 
 | 파일 | 역할 |

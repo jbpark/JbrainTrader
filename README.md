@@ -4,6 +4,8 @@
 
 Vue 웹 대시보드와 Flutter 모바일 앱으로 어디서든 상태를 확인할 수 있습니다.
 
+🔗 **기능 데모 (Mock 데이터)**: https://jbraintrader-demo.pages.dev — 실제 대시보드와 같은 메뉴 구조를 가짜 데이터로 재현한 소개 페이지입니다. 증권사 연결이나 주문은 일어나지 않습니다.
+
 > ⚠️ 이 프로젝트는 개인 학습·개발 기록입니다. 특정 종목이나 전략의 수익을 보장하지 않으며, 실계좌 매매로 발생하는 손실은 사용자 본인의 책임입니다. 반드시 모의투자로 충분히 검증한 뒤 사용하세요.
 
 ---
@@ -333,7 +335,7 @@ AI 기능은 로컬에 설치된 **Claude CLI**(`claude -p`)를 호출합니다.
 - Discord 봇: [discord_bot/.env.example](discord_bot/.env.example) 을 `discord_bot/.env` 로 복사해 값을 채운 뒤 `discord_bot/run_bot.bat`
 - Flutter 앱: `trading_app/` 에서 `flutter run`. 앱 설정 화면에서 엔진 서버 주소(IP:5000)를 입력합니다. APK 빌드는 `build_apk.bat`
 - Claude CLI 작업 기록 훅: [.claude/settings.json](.claude/settings.json)에 등록된 `UserPromptSubmit` / `Stop` 훅이 [cli_hook_prompt.py](cli_hook_prompt.py) 와 [cli_hook_stop.py](cli_hook_stop.py) 를 실행해 프롬프트와 결과 요약을 엔진(`JBRAIN_BASE_URL`, 기본 http://localhost:5000)으로 보내고, 대시보드 "CLI 작업" 탭에 저장합니다. 엔진이 꺼져 있으면 훅은 조용히 건너뜁니다.
-- 기능 데모 페이지: [demo/](demo/) 폴더의 정적 사이트를 Cloudflare Pages 등에 올려 메뉴 동작을 Mock 데이터로 소개할 수 있습니다. 배포 방법은 [demo/README.md](demo/README.md) 참고.
+- 기능 데모 페이지: [demo/](demo/) 폴더의 정적 사이트가 Cloudflare Pages에 배포되어 있습니다 → https://jbraintrader-demo.pages.dev . 재배포 방법은 [demo/README.md](demo/README.md) 참고.
 
 ---
 
