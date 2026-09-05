@@ -80,6 +80,17 @@
       <sub>시세 수신 → 전략 신호 → 주문 체결 → AI 알림이 WebSocket으로 흘러가는 엔진 로그</sub>
     </td>
   </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="docs/images/mobile_dashboard.jpg" width="180" alt="모바일 대시보드" />
+      <img src="docs/images/mobile_journal.jpg" width="180" alt="모바일 매매일지" />
+      <img src="docs/images/mobile_ai_picks_profile.jpg" width="180" alt="모바일 AI 종목" />
+      <img src="docs/images/mobile_ai_calendar_profile.jpg" width="180" alt="모바일 AI 캘린더" />
+      <img src="docs/images/mobile_ai_notice.jpg" width="180" alt="모바일 AI Notice" /><br/>
+      <b>📱 Flutter 모바일 앱</b><br/>
+      <sub>대시보드 · 매매일지 · AI 종목 · AI 캘린더 · AI Notice — 엔진 서버 주소만 넣으면 같은 데이터를 휴대폰에서 확인 (실제 화면, 계좌·금액 마스킹)</sub>
+    </td>
+  </tr>
 </table>
 
 ---
