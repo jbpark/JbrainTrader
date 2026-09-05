@@ -97,3 +97,6 @@ report/*
 !report/example_*.md
 docs/tistory/
 docs/guide/
+
+# Cloudflare wrangler 로컬 캐시
+.wrangler/
