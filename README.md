@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/logo.svg" width="96" height="96" alt="JbrainTrader 로고" />
+<img src="docs/images/JBrainTrader_Title.png" width="880" alt="JBrainTrader — 직장인의 평화, 감정 없는 성공 매매" />
 
 # JbrainTrader
 
@@ -14,6 +14,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [**🔗 라이브 데모 보기**](https://jbraintrader-demo.pages.dev) · [**📝 개발 이야기 (티스토리)**](https://javata.tistory.com/116) · [주요 기능](#주요-기능) · [화면 소개](#화면-소개) · [설치](#설치) · [전략 파일](#전략-파일) · [AI 기능](#ai-기능)
+
+<a href="https://javata.tistory.com/116"><img src="docs/images/JBrainTrader_Cartoon.png" width="880" alt="6컷 만화: JBrainTrader — 직장인의 평화" /></a>
+
+<sub>회의 중 폭락을 보며 멘탈이 흔들리던 직장인이 32비트의 저주를 뚫고 감정 없는 원칙 매매에 이르기까지. 자세한 이야기는 <a href="https://javata.tistory.com/116">티스토리 시리즈</a>에 있습니다.</sub>
+
+<br/><br/>
 
 <a href="https://jbraintrader-demo.pages.dev"><img src="docs/images/demo_main.png" width="880" alt="JbrainTrader 대시보드 (데모, Mock 데이터)" /></a>
 
