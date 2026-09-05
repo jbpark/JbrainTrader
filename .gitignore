@@ -100,3 +100,6 @@ docs/guide/
 
 # Cloudflare wrangler 로컬 캐시
 .wrangler/
+
+# Playwright MCP 스냅샷
+.playwright-mcp/

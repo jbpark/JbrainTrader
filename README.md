@@ -1,10 +1,27 @@
+<div align="center">
+
+<img src="docs/images/logo.svg" width="96" height="96" alt="JbrainTrader 로고" />
+
 # JbrainTrader
 
-키움증권 OpenAPI로 시세·계좌를 연동하고, 파일로 정의한 전략을 백테스트·모의매매·실매매하며, AI(Claude CLI)가 종목 선별·매매 전략·아침 브리핑·매매 복기를 도와주는 **개인용 주식 자동매매 시스템**입니다.
+**키움 OpenAPI 연동 · 텍스트 파일 전략 · Claude CLI 기반 AI 운용을 갖춘 개인용 주식 자동매매 시스템**
 
-Vue 웹 대시보드와 Flutter 모바일 앱으로 어디서든 상태를 확인할 수 있습니다.
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11-3776AB?logo=python&logoColor=white)](requirements_64.txt)
+[![Vue 3](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)](frontend/)
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](trading_app/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)](core/database.py)
+[![Claude CLI](https://img.shields.io/badge/AI-Claude%20CLI-D97757?logo=anthropic&logoColor=white)](#ai-기능)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-🔗 **기능 데모 (Mock 데이터)**: https://jbraintrader-demo.pages.dev — 실제 대시보드와 같은 메뉴 구조를 가짜 데이터로 재현한 소개 페이지입니다. 증권사 연결이나 주문은 일어나지 않습니다.
+[**🔗 라이브 데모 보기**](https://jbraintrader-demo.pages.dev) · [주요 기능](#주요-기능) · [화면 소개](#화면-소개) · [설치](#설치) · [전략 파일](#전략-파일) · [AI 기능](#ai-기능)
+
+<a href="https://jbraintrader-demo.pages.dev"><img src="docs/images/demo_main.png" width="880" alt="JbrainTrader 대시보드 (데모, Mock 데이터)" /></a>
+
+<sub>위 화면은 <a href="https://jbraintrader-demo.pages.dev">데모 사이트</a>를 캡처한 것으로 모든 숫자는 Mock 데이터입니다. 실제 계좌·시세가 아닙니다.</sub>
+
+</div>
+
+키움증권 OpenAPI로 시세·계좌를 연동하고, 파일로 정의한 전략을 백테스트·모의매매·실매매하며, AI(Claude CLI)가 종목 선별·매매 전략·아침 브리핑·매매 복기를 도와줍니다. Vue 웹 대시보드와 Flutter 모바일 앱으로 어디서든 상태를 확인할 수 있습니다.
 
 > ⚠️ 이 프로젝트는 개인 학습·개발 기록입니다. 특정 종목이나 전략의 수익을 보장하지 않으며, 실계좌 매매로 발생하는 손실은 사용자 본인의 책임입니다. 반드시 모의투자로 충분히 검증한 뒤 사용하세요.
 
@@ -24,6 +41,46 @@ Vue 웹 대시보드와 Flutter 모바일 앱으로 어디서든 상태를 확�
 | 알림 | Discord 봇으로 로그·포트폴리오·전략 이탈 알림 |
 | 모바일 | Flutter 앱(Android/Web/Windows)에서 대시보드·매매일지·AI 탭·계좌 전환 |
 | 개발 편의 | Claude CLI 훅으로 개발 작업 기록을 대시보드 "CLI 작업" 탭에 자동 저장 |
+
+---
+
+## 화면 소개
+
+대시보드의 주요 메뉴입니다. 모든 화면은 [데모 사이트](https://jbraintrader-demo.pages.dev)에서 직접 눌러 볼 수 있으며, 각 화면 오른쪽 안내 상자가 메뉴의 용도와 사용 순서를 설명합니다.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <a href="https://jbraintrader-demo.pages.dev/#/MONITORING"><img src="docs/images/demo_watchlist.png" alt="관심종목" /></a><br/>
+      <b>🖥️ 관심종목</b><br/>
+      <sub>종목마다 전략 파일을 지정하고 시작/중지로 자동매매를 제어</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="https://jbraintrader-demo.pages.dev/#/STRATEGY"><img src="docs/images/demo_strategy.png" alt="전략 편집" /></a><br/>
+      <b>⚡ 전략</b><br/>
+      <sub>코드가 아닌 INI 텍스트 파일로 매수·매도·손절 조건을 정의</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <a href="https://jbraintrader-demo.pages.dev/#/AITRADES"><img src="docs/images/demo_ai_trades.png" alt="AI 매매 전략" /></a><br/>
+      <b>🤖 AI 매매</b><br/>
+      <sub>Claude CLI가 목표가·손절가·비중을 제안하고, 장중 이탈 감시의 기준으로 사용</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="https://jbraintrader-demo.pages.dev/#/JOURNAL"><img src="docs/images/demo_journal.png" alt="매매일지" /></a><br/>
+      <b>📒 매매일지</b><br/>
+      <sub>달력형 일별 실현손익과 매매 상세, 구글 시트 자동 업로드</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <a href="https://jbraintrader-demo.pages.dev/#/LOG"><img src="docs/images/demo_log.png" width="720" alt="실시간 로그" /></a><br/>
+      <b>📜 실시간 로그</b><br/>
+      <sub>시세 수신 → 전략 신호 → 주문 체결 → AI 알림이 WebSocket으로 흘러가는 엔진 로그</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 

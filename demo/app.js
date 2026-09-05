@@ -168,7 +168,8 @@
       ${line(r.target, '목표가', '#00ff88')}
       ${line(entry[1], '진입 상단', '#00d4ff')}${line(entry[0], '진입 하단', '#00d4ff')}
       ${line(r.stop, '손절가', '#ff4d4d')}
-      <line x1="90" x2="330" y1="${y(cur)}" y2="${y(cur)}" stroke="#ffcc00" stroke-width="2"/><text x="336" y="${y(cur) + 4}" fill="#ffcc00" font-size="11">현재 ${fmt(cur)}</text>
+      <line x1="90" x2="330" y1="${y(cur)}" y2="${y(cur)}" stroke="#ffcc00" stroke-width="2"/>
+      <text x="210" y="${y(cur) - 6}" fill="#ffcc00" font-size="11" font-weight="700" text-anchor="middle">현재가 ${fmt(cur)}</text>
     </svg>`;
   }
 
