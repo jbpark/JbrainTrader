@@ -1,0 +1,10 @@
+# Kiwoom OpenAPI (32-bit Python) 전용 라이브러리
+PyQt5
+pywin32
+pyzmq
+pandas
+numpy
+requests
+python-dotenv
+cryptography
+openpyxl

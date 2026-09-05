@@ -1,0 +1,62 @@
+[INFO]
+type = single
+name = SPLIT_SCALPING
+version = 1.1
+description = 분할 매수 / 분할 매도 단타 전략
+
+################################
+# 1. 분할 매수 규칙
+################################
+[BUY]
+max_steps = 3
+
+[BUY_STEP_1]
+condition = (
+    price > ma_5 and
+    volume > avg_volume * 1.5
+    )
+size = 0.4
+
+[BUY_STEP_2]
+condition = (
+    price < avg_price * 0.99 and
+    volume < prev_volume
+    )
+size = 0.3
+
+[BUY_STEP_3]
+condition = (
+    price < avg_price * 0.98
+    )
+size = 0.3
+
+################################
+# 2. 손절 규칙
+################################
+[STOP_LOSS]
+condition = price <= avg_price * 0.97
+
+################################
+# 3. 분할 매도 규칙
+################################
+[SELL]
+max_steps = 3
+
+[SELL_STEP_1]
+condition = price >= avg_price * 1.01
+size = 0.4
+
+[SELL_STEP_2]
+condition = price >= avg_price * 1.02
+size = 0.3
+
+[SELL_STEP_3]
+condition = price >= avg_price * 1.03
+size = all
+
+################################
+# 4. 시간 손절
+################################
+[TIME_STOP]
+enabled = true
+max_minutes = 10

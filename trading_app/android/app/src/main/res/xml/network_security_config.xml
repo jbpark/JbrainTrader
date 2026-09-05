@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 모든 HTTP 트래픽 허용 (개발/사내 서버 접속용) -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+
+    <!-- 특정 도메인에 대한 설정 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- iptime DDNS 서버 -->
+        <domain includeSubdomains="true">iptime.org</domain>
+        <!-- 로컬 네트워크 IP 대역 (192.168.x.x) -->
+        <domain includeSubdomains="true">192.168.0.1</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+</network-security-config>

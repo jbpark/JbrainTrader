@@ -1,0 +1,99 @@
+# ─────────────────────────────────────────────
+# 환경 변수 / 시크릿 (절대 커밋 금지!)
+# ─────────────────────────────────────────────
+.env
+discord_bot/.env
+*.env
+*.key
+
+# ─────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+
+# ─────────────────────────────────────────────
+# Node / Vue
+# ─────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+.npm
+
+# ─────────────────────────────────────────────
+# Flutter / Dart
+# ─────────────────────────────────────────────
+trading_app/.dart_tool/
+trading_app/build/
+trading_app/.flutter-plugins
+trading_app/.flutter-plugins-dependencies
+trading_app/.packages
+trading_app/pubspec.lock
+
+# ─────────────────────────────────────────────
+# 로그 / 임시 파일
+# ─────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+*.pid
+Thumbs.db
+
+# ─────────────────────────────────────────────
+# 데이터베이스
+# ─────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+backend/data/
+
+# ─────────────────────────────────────────────
+# IDE
+# ─────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.iml
+
+# ─────────────────────────────────────────────
+# 민감 설정 / 임시 스크립트
+# ─────────────────────────────────────────────
+backend/settings/account_config.json
+tmp_decrypt_keys.py
+secret/
+
+# ─────────────────────────────────────────────
+# 로컬 전용 데이터 / 일회성 작업 스크립트 보관소
+# ─────────────────────────────────────────────
+scratch/
+stock.xlsx
+stock_backup.xlsx
+*.parquet
+
+# ─────────────────────────────────────────────
+# 공개 저장소 추가 제외 (로컬 로그 / 개인 설정)
+# ─────────────────────────────────────────────
+discord_bot/id_check.txt
+discord_bot/interaction_log.txt
+.claude/settings.local.json
+prompt_*.md
+.claude/launch.json
+tmp/
+report/*
+!report/example_*.md
+docs/tistory/
+docs/guide/

@@ -1,0 +1,16 @@
+[INFO]
+type = single
+name = SCALP_09
+description = EMA Golden Cross (Aggressive)
+[BUY]
+max_steps = 1
+[BUY_STEP_1]
+condition = ema20 > ema60 and prev_price < ema20 and price > ema20
+size = 1.0
+[STOP_LOSS]
+condition = price < ema60
+[SELL]
+max_steps = 1
+[SELL_STEP_1]
+condition = hist < prev_hist or rsi > 70
+size = all

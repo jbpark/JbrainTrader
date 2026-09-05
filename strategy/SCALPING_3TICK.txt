@@ -1,0 +1,57 @@
+[INFO]
+type = split
+name = SCALPING_3TICK
+description = 정배열 모멘텀 스캘핑 (EMA 20 > 60 조건 추가, 일 3회 진입)
+
+################################
+# 1. 매수 규칙 (3단계 분할 진입)
+################################
+[BUY]
+max_steps = 3
+
+[BUY_STEP_1]
+# 진입 조건: 
+# 1) 추세: 정배열 (EMA 20 > EMA 60)
+# 2) 가격: EMA 20 위에서 움직일 때
+# 3) 모멘텀: 최근 10틱 중 70% 이상 상승 (uptick_10 >= 0.7)
+# 4) 횟수: 당일 진입 기록이 3회 미만일 때
+condition = (
+    ema20 > ema60 and
+    price > ema20 and
+    uptick_10 >= 0.7 and
+    daily_buy_count < 3
+    )
+size = 0.4
+
+[BUY_STEP_2]
+# 불타기 1차: 수익률 1.5% 이상 시 추가 매입
+condition = (price - entry_price) / entry_price >= 0.015
+size = 0.3
+
+[BUY_STEP_3]
+# 불타기 2차: 수익률 2.5% 이상 시 추가 매입
+condition = (price - entry_price) / entry_price >= 0.025
+size = 0.3
+
+################################
+# 2. 손절 규칙 (-1.0%)
+################################
+[STOP_LOSS]
+condition = (price - entry_price) / entry_price <= -0.01
+
+################################
+# 3. 익절 규칙 (트레일링 스탑)
+################################
+[SELL]
+max_steps = 1
+
+[SELL_STEP_1]
+# 트레일링 익절: 진입 후 최고가 대비 1.0% 하락 시 전량 매도
+condition = price <= highest_price * 0.99
+size = all
+
+################################
+# 4. 기타 설정
+################################
+[FORCE_SELL]
+condition = is_market_close == true

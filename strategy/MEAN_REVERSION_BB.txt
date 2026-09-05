@@ -1,0 +1,50 @@
+[INFO]
+type = single
+name = MEAN_REVERSION_BB
+version = 1.0
+description = Bollinger Bands + RSI 기반 역추세 매매 (눌림목/과매도)
+
+[BUY]
+max_steps = 2
+
+[BUY_STEP_1]
+# BB 하단 이탈 + RSI 과매도 (30 이하)
+condition = (
+    price < bb_lower and
+    rsi < 30
+    )
+size = 0.5
+
+[BUY_STEP_2]
+# 분할 매수: 가격이 더 내려갔으나 RSI 저점 상승 (다이버전스 기대) 또는 하단 재진입
+condition = (
+    price < last_buy_price and
+    rsi < 35
+    )
+size = 0.5
+
+[STOP_LOSS]
+# 손절: BB 하단에서 1.5 ATR 이상 추가 하락 시 (흐름 붕괴)
+condition = price < bb_lower - 1.5 * atr
+
+[SELL]
+max_steps = 3
+
+[SELL_STEP_1]
+# 1차 목표: BB 중심선 도달 - 40% 매도
+condition = price > bb_middle
+size = 0.4
+
+[SELL_STEP_2]
+# 2차 목표: BB 상단선 도달 - 50% 매도
+condition = price > bb_upper
+size = 0.5
+
+[SELL_STEP_3]
+# 전량 매도: RSI 과매수 구간 진입
+condition = rsi > 65
+size = all
+
+[TIME_STOP]
+enabled = true
+max_minutes = 60

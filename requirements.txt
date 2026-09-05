@@ -1,0 +1,13 @@
+websockets
+flask-cors
+pandas
+numpy
+pywin32
+PyQt5
+flask
+requests
+pymysql
+openpyxl
+backtrader
+yfinance
+pykrx

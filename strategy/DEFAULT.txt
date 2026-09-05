@@ -1,0 +1,66 @@
+[INFO]
+type = single
+name = DEFAULT
+version = 1.0
+description = 기본 MACD + EMA 전략 (파일 버전)
+
+################################
+# 1. 매수 규칙
+################################
+[BUY]
+max_steps = 1
+
+[BUY_STEP_1]
+# ema20 > ema60 and macd > signal and hist > prev_hist
+condition = (
+    ema20 > ema60 and
+    macd > signal and
+    hist > prev_hist
+    )
+size = 1.0
+
+################################
+# 2. 손절 규칙 (구조 붕괴)
+################################
+[STOP_LOSS]
+# price <= first_buy_price - 1.2 * atr
+condition = price <= first_buy_price - 1.2 * atr
+
+################################
+# 3. 분할 매도 규칙 (익절/트레일링)
+################################
+[SELL]
+max_steps = 3
+
+# VWAP 붕괴 (전량 청산)
+[SELL_STEP_1]
+# price < vwap and (price < ema20 or is_fractal_low)
+condition = (
+    price < vwap and
+    (price < ema20 or is_fractal_low)
+    )
+size = all
+
+# 하락 추세 1단계 (-0.5 ATR) - 30% 매도
+[SELL_STEP_2]
+# (price - last_buy_price <= -0.5 * atr) and (price < ema20 or is_fractal_low)
+condition = (
+    (price - last_buy_price <= -0.5 * atr) and
+    (price < ema20 or is_fractal_low)
+    )
+size = 0.3
+
+# 하락 추세 2단계 (-1.0 ATR) - 50% 매도
+[SELL_STEP_3]
+# (price - last_buy_price <= -1.0 * atr) and (price < ema20 or is_fractal_low)
+condition = (
+    (price - last_buy_price <= -1.0 * atr) and
+    (price < ema20 or is_fractal_low)
+    )
+size = 0.5
+
+################################
+# 4. 시간 손절
+################################
+[TIME_STOP]
+enabled = false

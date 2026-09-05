@@ -1,0 +1,16 @@
+[INFO]
+type = single
+name = SCALP_03
+description = BB Mean Reversion Scalper
+[BUY]
+max_steps = 1
+[BUY_STEP_1]
+condition = price < bb_lower
+size = 0.6
+[STOP_LOSS]
+condition = price < bb_lower - 0.5 * atr
+[SELL]
+max_steps = 1
+[SELL_STEP_1]
+condition = price > bb_middle
+size = all

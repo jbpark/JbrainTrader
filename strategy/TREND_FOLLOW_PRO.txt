@@ -1,0 +1,51 @@
+[INFO]
+type = single
+name = TREND_FOLLOW_PRO
+version = 1.0
+description = EMA + MACD + RSI 기반 추세 추종 분할 매수 전략
+
+[BUY]
+max_steps = 2
+
+[BUY_STEP_1]
+# EMA 골든크로스 + MACD 양수 + RSI 상향
+condition = (
+    ema20 > ema60 and
+    macd > signal and
+    rsi > 50
+    )
+size = 0.6
+
+[BUY_STEP_2]
+# 불타기 (Pyramiding): 가격이 EMA20 위에서 유지되며 MACD 히스토그램 증가 지속
+condition = (
+    price > ema20 and
+    hist > prev_hist and
+    price > last_buy_price
+    )
+size = 0.4
+
+[STOP_LOSS]
+# 구조 붕괴: EMA60 하향 돌파 또는 ATR 2배 이상 손실
+condition = price < ema60 or price <= first_buy_price - 2.0 * atr
+
+[SELL]
+max_steps = 3
+
+[SELL_STEP_1]
+# 1차 익절: RSI 과매수 (70 돌파) - 30% 매도
+condition = rsi > 70
+size = 0.3
+
+[SELL_STEP_2]
+# 2차 익절: 추세 약화 (EMA20 하향 돌파) - 50% 매도
+condition = price < ema20
+size = 0.5
+
+[SELL_STEP_3]
+# 전량 매도: MACD 데드크로스 또는 전량 청산 조건
+condition = macd < signal
+size = all
+
+[TIME_STOP]
+enabled = false

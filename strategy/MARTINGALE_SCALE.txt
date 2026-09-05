@@ -1,0 +1,47 @@
+[INFO]
+type = single
+name = MARTINGALE_SCALE
+version = 1.0
+description = 3배 마틴게일 물타기 전략 (1 -> 3 -> 9 -> 27)
+
+################################
+# 1. 분할 매수 규칙 (최대 4단계)
+################################
+[BUY]
+max_steps = 4
+
+[BUY_STEP_1]
+# 최초 1주 진입
+condition = true
+size = 1
+
+[BUY_STEP_2]
+# 1주 매수 후 -5% 이하면 3주 매수
+condition = price <= last_buy_price * 0.95
+size = 3
+
+[BUY_STEP_3]
+# 3주 매수 후 -5% 이하면 9주 매수
+condition = price <= last_buy_price * 0.95
+size = 9
+
+[BUY_STEP_4]
+# 9주 매수 후 -5% 이하면 27주 매수
+condition = price <= last_buy_price * 0.95
+size = 27
+
+################################
+# 2. 익절 및 손절 규칙
+################################
+[SELL]
+max_steps = 1
+
+[SELL_STEP_1]
+# 평균단가 대비 +1.5% 상승 시 전량 익절
+condition = price >= avg_price * 1.015
+size = all
+
+[STOP_LOSS]
+# 4단계(27주)까지 매수 후 추가로 -5% 하락 시 손절 (원금 보호 및 추가 폭락 방지)
+# position_qty 가드로 4단계 완료(총 40주) 이전에는 손절이 발동하지 않도록 명시
+condition = position_qty >= 40 and price <= last_buy_price * 0.95

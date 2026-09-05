@@ -1,0 +1,191 @@
+#app {
+  width: 100%;
+}
+
+.tabs-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+  max-width: 260px;
+  color: var(--text-muted);
+  margin-bottom: -1px;
+  position: relative;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab-item.non-closable {
+  min-width: 110px;
+}
+
+.tab-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+}
+
+.tab-item.active {
+  background: #0f172a;
+  border-bottom: 1px solid #0f172a;
+  border-top: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  z-index: 1;
+}
+
+.main-tab-content {
+  flex: 1;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 2rem;
+  background: #0f172a;
+  border-radius: 0 12px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: none;
+  overflow-y: auto;
+}
+
+.tab-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+
+.tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 14px;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.tab-close:hover {
+  background: rgba(255, 77, 77, 0.2);
+  color: #ff4d4d;
+}
+
+.analysis-panels-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.no-analysis-message {
+  margin-top: 2rem;
+  padding: 4rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Hierarchical Sidebar Menu */
+.menu-node {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary);
+}
+
+.menu-item.active {
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+}
+
+.menu-toggle {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  width: 12px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.menu-toggle.open {
+  transform: rotate(90deg);
+}
+
+.menu-children {
+  margin-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  padding-left: 12px;
+}
+
+.menu-content {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Sub-option labels used in modals/panels */
+.sub-option {
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+.sub-option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.sub-option.active {
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+  font-weight: 500;
+}

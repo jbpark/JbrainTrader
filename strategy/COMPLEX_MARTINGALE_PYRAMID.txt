@@ -1,0 +1,79 @@
+[INFO]
+type = single
+name = COMPLEX_MARTINGALE_PYRAMID
+version = 1.2
+description = 불타기 감속(아이디어2) + 물타기 최종 하방 제한(아이디어1) 혼합 전략
+
+################################
+# 1. 분할 매수 규칙 (최대 50단계 설정)
+# 국내 주식은 소수점 주문이 불가하므로 기존 1 / 0.5 / 0.25 / 0.1주 설계를
+# 20배로 환산 (20 / 10 / 5 / 2주). 물타기 배수(1:3:9)는 동일 (20 -> 60 -> 180)
+################################
+[BUY]
+max_steps = 50
+
+[BUY_STEP_1]
+# 최초 20주 진입
+condition = true
+size = 20
+
+[BUY_STEP_2]
+# 수량 20주일 때:
+# - 상승 시: +5% 상승 시 불타기 1차 (20주)
+# - 하락 시: -5% 하락 시 물타기 1차 (60주)
+condition = (position_qty == 20) and (price >= last_buy_price * 1.05 or price <= last_buy_price * 0.95)
+size_expr = 60.0 if price <= last_buy_price * 0.95 else 20.0
+
+[BUY_STEP_3]
+# - 불타기 2차: 현재 수량 40주일 때, +7% 상승 시 10주 추가 매수 (피라미딩 감속 및 이격 확대)
+# - 물타기 2차: 현재 수량 80주일 때, -5% 하락 시 180주 추가 매수 (총 260주)
+condition = (position_qty == 40 and price >= last_buy_price * 1.07) or (position_qty == 80 and price <= last_buy_price * 0.95)
+size_expr = 180.0 if position_qty == 80 else 10.0
+
+[BUY_STEP_4]
+# - 불타기 3차: 현재 수량 50주일 때, +10% 상승 시 5주 추가 매수 (감속 심화)
+# 물타기 상태(260주)인 경우는 추가 매수 전면 금지
+condition = (position_qty == 50) and (price >= last_buy_price * 1.10)
+size = 5
+
+[BUY_STEP_5]
+# - 불타기 4차 이상: 현재 수량이 55주 이상이고 물타기 미진입 상태일 때, +12% 상승 시 2주 추가 매수 (극소량 진입)
+condition = (position_qty >= 55 and position_qty < 260) and (price >= last_buy_price * 1.12)
+size = 2
+
+[BUY_STEP_6]
+condition = (position_qty >= 55 and position_qty < 260) and (price >= last_buy_price * 1.12)
+size = 2
+
+[BUY_STEP_7]
+condition = (position_qty >= 55 and position_qty < 260) and (price >= last_buy_price * 1.12)
+size = 2
+
+[BUY_STEP_8]
+condition = (position_qty >= 55 and position_qty < 260) and (price >= last_buy_price * 1.12)
+size = 2
+
+[BUY_STEP_9]
+condition = (position_qty >= 55 and position_qty < 260) and (price >= last_buy_price * 1.12)
+size = 2
+
+[BUY_STEP_10]
+condition = (position_qty >= 55 and position_qty < 260) and (price >= last_buy_price * 1.12)
+size = 2
+
+################################
+# 2. 익절 및 본전 탈출 규칙
+################################
+[SELL]
+max_steps = 1
+
+[SELL_STEP_1]
+# 1. 불타기(수량 80주 미만) 시: 최고점 수익률이 1.5% 이상에 도달한 적이 있고, 현재 수익률이 1% 이하로 꺾였을 때 익절 청산
+# 2. 물타기(수량 80주 이상) 시: 평단가 대비 +0.5% 이상 반등 시 즉시 본전 탈출 청산
+condition = (position_qty < 80 and highest_price >= avg_price * 1.015 and price <= avg_price * 1.01) or (position_qty >= 80 and price >= avg_price * 1.005)
+size = all
+
+[STOP_LOSS]
+# 아이디어 1 적용: 물타기 최종 단계(260주) 완료 후, 추가로 -5% 이상 더 하락할 경우
+# 장기 고립 및 자금 묶임을 방지하기 위해 기계적으로 손절 처리
+condition = position_qty >= 260 and price <= last_buy_price * 0.95

@@ -1,0 +1,38 @@
+[INFO]
+type = single
+name = UP_TICK_3_BUY
+version = 1.0
+description = 상승 틱 진입 후 +3틱 익절 / -3틱 손절 초단타 전략
+
+################################
+# 1. 매수 규칙
+################################
+[BUY]
+max_steps = 1
+
+[BUY_STEP_1]
+# 직전 틱보다 상승한 경우
+condition = price > prev_price
+size = 1.0
+
+################################
+# 2. 손절 규칙 (-3 tick)
+################################
+[STOP_LOSS]
+condition = price <= entry_price - (tick_size * 3)
+
+################################
+# 3. 익절 규칙 (+3 tick)
+################################
+[SELL]
+max_steps = 1
+
+[SELL_STEP_1]
+condition = price >= entry_price + (tick_size * 3)
+size = all
+
+################################
+# 4. 장 종료 강제 매도
+################################
+[FORCE_SELL]
+condition = is_market_close == true

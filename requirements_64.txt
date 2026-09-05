@@ -1,0 +1,17 @@
+# Main Backend & Strategy Engine (64-bit Python) 전용 라이브러리
+flask
+flask-cors
+websockets
+pyzmq
+pandas
+numpy
+bottleneck>=1.6.0
+requests
+yfinance
+pykrx
+backtrader
+python-dotenv
+cryptography
+pymysql
+openpyxl
+discord.py

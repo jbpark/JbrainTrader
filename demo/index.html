@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JbrainTrader 데모</title>
+  <meta name="description" content="JbrainTrader 주식 자동매매 대시보드의 메뉴와 기능을 Mock 데이터로 소개하는 데모 페이지입니다. 실제 계좌·시세·매매 데이터가 아닙니다." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%232D2D2D'/%3E%3Cpath d='M25 20 H65 C80 20 80 45 65 45 C80 45 80 70 65 70 H25 V20 Z M37 30 V40 H60 Q65 40 60 30 H37 Z M37 50 V60 H60 Q65 60 60 50 H37 Z' fill='white' fill-rule='evenodd'/%3E%3Cpath d='M50 30 L40 50 H55 L40 75 L60 45 H45 L55 30 Z' fill='%23FF7F11'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="demo-banner">
+    <span><b>DEMO</b> · 이 페이지의 모든 숫자는 <b>Mock 데이터</b>입니다. 실제 계좌·시세·매매 기록이 아니며 투자 권유가 아닙니다.</span>
+    <span>기능 소개용 데모 · <a href="https://github.com/jbpark/JbrainTrader" target="_blank" rel="noopener">GitHub 저장소 ↗</a></span>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="100" height="100" rx="16" fill="#2D2D2D" />
+          <path d="M25 20 H65 C80 20 80 45 65 45 C80 45 80 70 65 70 H25 V20 Z M37 30 V40 H60 Q 65 40 60 30 H37 Z M37 50 V60 H60 Q 65 60 60 50 H37 Z" fill="white" fill-rule="evenodd" />
+          <path d="M50 30 L40 50 H55 L40 75 L60 45 H45 L55 30 Z" fill="#FF7F11" />
+        </svg>
+        <h2>JBrain <span class="sub">DEMO</span></h2>
+      </div>
+      <div class="sidebar-body">
+        <div class="section-title">계정 및 상태</div>
+        <div class="card status-card">
+          <div class="row between"><span class="small muted">상태</span><span class="status-dot">● CONNECTED (모의)</span></div>
+          <button id="connectBtn" style="width:100%" class="small">연결 설정</button>
+        </div>
+        <div class="section-title" style="margin-top:22px">네비게이션</div>
+        <nav class="nav" id="nav"></nav>
+        <div class="small muted" style="margin-top:18px; line-height:1.6">
+          ⚡ 표시된 메뉴는 전략·AI 관련 핵심 기능입니다.<br/>
+          각 화면 오른쪽 안내 상자에서 사용법을 확인하세요.
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <h1 class="page-title">단타 매매 시스템 <span class="tag yellow">DEMO · Mock Data</span></h1>
+      <div class="tabs" id="tabs"></div>
+      <div class="content-wrap">
+        <section class="content" id="content"></section>
+        <aside class="guide" id="guide"></aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- 연결 설정 모달 -->
+  <div class="modal-bg" id="loginModal">
+    <div class="modal">
+      <div class="row between"><h3>연결 설정 — 로그인 방식 선택</h3><button class="small" data-close>×</button></div>
+      <p class="small muted" style="margin:0 0 12px">실제 대시보드에서는 여기서 선택한 방식으로 키움 게이트웨이가 자동 로그인을 시작합니다. 장 운영 시간 외에는 모의투자 서버 접속이 제한될 수 있습니다.</p>
+      <div class="opt" data-mode="모의투자"><b>🧪 모의투자 (STOCK)</b><span class="small muted">KIWOOM_IS_MOCK=1 — 검증이 끝나기 전까지 권장</span></div>
+      <div class="opt" data-mode="실거래"><b>💰 실거래 (STOCK)</b><span class="small muted">실제 계좌로 주문이 나갑니다. 충분히 검증한 뒤 사용</span></div>
+      <div class="opt" data-mode="해외주식"><b>🌐 해외주식 (OVERSEAS)</b><span class="small muted">한국투자증권 REST API 연결 — 국내/해외 토글 활성화</span></div>
+    </div>
+  </div>
+
+  <!-- 도우미 마스코트 -->
+  <button class="helper-btn" id="helperBtn" title="도우미 켜기">🐾</button>
+  <div class="helper-panel" id="helper">
+    <div class="hd"><span>🐾 도우미 (데모)</span><button class="small" id="helperClose" title="닫기">×</button></div>
+    <div class="msgs" id="helperMsgs"></div>
+    <div class="quick" id="helperQuick"></div>
+    <div class="in"><input id="helperIn" placeholder="무엇이든 물어보세요..." /><button class="primary small" id="helperSend">전송</button></div>
+  </div>
+
+  <div class="toast-wrap" id="toasts"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

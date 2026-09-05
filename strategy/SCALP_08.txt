@@ -1,0 +1,16 @@
+[INFO]
+type = single
+name = SCALP_08
+description = BB + MACD Scalper
+[BUY]
+max_steps = 1
+[BUY_STEP_1]
+condition = price < bb_lower and hist > prev_hist
+size = 0.8
+[STOP_LOSS]
+condition = price < bb_lower - 0.5 * atr
+[SELL]
+max_steps = 1
+[SELL_STEP_1]
+condition = price > bb_middle and hist < prev_hist
+size = all
