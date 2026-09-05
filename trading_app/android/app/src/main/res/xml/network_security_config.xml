@@ -9,8 +9,6 @@
 
     <!-- 특정 도메인에 대한 설정 -->
     <domain-config cleartextTrafficPermitted="true">
-        <!-- iptime DDNS 서버 -->
-        <domain includeSubdomains="true">iptime.org</domain>
         <!-- 로컬 네트워크 IP 대역 (192.168.x.x) -->
         <domain includeSubdomains="true">192.168.0.1</domain>
         <domain includeSubdomains="true">localhost</domain>
